@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniSolve HelpDesk | Student Support</title>
+    
+    <!-- External Styling & Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ANIMATED BACKGROUND MESH -->
+    <div class="bg-circles">
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+    
+    <!-- 0. LANDING PAGE (HOMEPAGE) -->
+<section id="landing-page" class="view">
+    <!-- Landing Navigation -->
+    <nav class="landing-nav glass">
+        <div class="logo-box">
+            <i class="fas fa-leaf"></i>
+            <span>UniSolve</span>
+        </div>
+        <div class="nav-menu">
+            <a href="#about">About</a>
+            <a href="#team">Creators</a>
+            <button class="btn-login-trigger" onclick="enterApp()">Get Started</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero animate__animated animate__fadeIn">
+        <div class="hero-content">
+            <h1>Empowering Students, <br><span class="text-green">One Solution</span> at a Time.</h1>
+            <p>The central hub for IT support, finance queries, and university life. Built by students, for students.</p>
+            <div class="hero-btns">
+                <button class="btn-primary-large" onclick="enterApp()">Launch HelpDesk <i class="fas fa-rocket"></i></button>
+                <a href="#about" class="btn-secondary-large">Learn More</a>
+            </div>
+        </div>
+        <div class="hero-image animate__animated animate__zoomIn">
+            <img src="https://illustrations.popsy.co/emerald/remote-work.svg" alt="Support Illustration">
+        </div>
+    </header>
+
+    <!-- About & Motive Section -->
+    <section id="about" class="landing-section">
+        <div class="section-container">
+            <div class="info-card glass animate__animated animate__fadeInUp">
+                <i class="fas fa-bullseye"></i>
+                <h3>Our Motive</h3>
+                <p>UniSolve was born out of the frustration of long email threads and delayed responses. Our motive is to provide a **real-time, centralized interface** where students can get answers instantly from specialized departments.</p>
+            </div>
+            <div class="info-card glass animate__animated animate__fadeInUp" style="animation-delay: 0.2s">
+                <i class="fas fa-heart"></i>
+                <h3>Student-Centric</h3>
+                <p>We prioritize your academic flow. Whether it's a Canvas login issue or a finance payment query, we ensure you spend less time worrying and more time learning.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Creators Section -->
+     <!-- Creators Section -->
+<section id="team" class="landing-section">
+    <h2 class="section-title">Meet the Team</h2>
+    <div class="team-grid">
+        
+        <!-- Project Manager -->
+        <div class="team-card glass animate__animated animate__fadeInUp">
+            <div class="role-icon"><i class="fas fa-user-tie"></i></div>
+            <img src="https://ui-avatars.com/api/?name=Ranjan+Katwal&background=064e3b&color=fff" alt="PM">
+            <h4>Ranjan Katwal</h4>
+            <p class="role-title">Project Manager</p>
+            <span>Team Lead & Coordination</span>
+        </div>
+
+        <!-- Business Analyst -->
+        <div class="team-card glass animate__animated animate__fadeInUp" style="animation-delay: 0.1s">
+            <div class="role-icon"><i class="fas fa-chart-line"></i></div>
+            <img src="https://ui-avatars.com/api/?name=Nayan&background=10b981&color=fff" alt="BA">
+            <h4>Nayan</h4>
+            <p class="role-title">Business Analyst</p>
+            <span>Requirements & Logic</span>
+        </div>
+
+        <!-- Frontend (You) -->
+        <div class="team-card glass animate__animated animate__fadeInUp" style="animation-delay: 0.2s">
+            <div class="role-icon"><i class="fas fa-code"></i></div>
+            <img src="https://ui-avatars.com/api/?name=Sara+Ghimire+Kshetri&background=059669&color=fff" alt="Frontend">
+            <h4>Sara Ghimire Kshetri</h4>
+            <p class="role-title">Frontend Developer</p>
+            <span>UI/UX & Interactive Design</span>
+        </div>
+
+        <!-- Backend 1 -->
+        <div class="team-card glass animate__animated animate__fadeInUp" style="animation-delay: 0.3s">
+            <div class="role-icon"><i class="fas fa-server"></i></div>
+            <img src="https://ui-avatars.com/api/?name=Krishna+Nayak&background=064e3b&color=fff" alt="Backend">
+            <h4>Krishna Nayak</h4>
+            <p class="role-title">Backend Developer</p>
+            <span>API & Database Management</span>
+        </div>
+
+        <!-- Backend 2 -->
+        <div class="team-card glass animate__animated animate__fadeInUp" style="animation-delay: 0.4s">
+            <div class="role-icon"><i class="fas fa-database"></i></div>
+            <img src="https://ui-avatars.com/api/?name=Roman+Poudel&background=064e3b&color=fff" alt="Backend">
+            <h4>Roman Poudel</h4>
+            <p class="role-title">Backend Developer</p>
+            <span>Server Architecture</span>
+        </div>
+
+    </div>
+</section>
+
+    <footer class="landing-footer">
+        <p>&copy; 2024 UniSolve HelpDesk Project. All Rights Reserved.</p>
+    </footer>
+</section>
+
+
+    <!-- 1. AUTHENTICATION VIEW -->
+    <section id="auth-section" class="view animate__animated animate__fadeIn">
+        <div class="auth-card glass">
+            <div class="auth-logo">
+                <i class="fas fa-graduation-cap"></i>
+                <h1>UniSolve</h1>
+                <p>Smart Helpdesk Solution</p>
+            </div>
+
+            <!-- Login Form -->
+            <div id="login-form">
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="login-email" placeholder="University Email">
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="login-pass" placeholder="Password">
+                </div>
+                <button class="btn-primary" onclick="handleLogin()">Sign In</button>
+                <p class="auth-footer">New student? <a href="#" onclick="toggleAuth()">Create Account</a></p>
+            </div>
+
+            <!-- Signup Form -->
+            <div id="signup-form" class="hidden">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="reg-name" placeholder="Full Name">
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="reg-email" placeholder="Email Address">
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="reg-pass" placeholder="Create Password">
+                </div>
+                <button class="btn-primary" onclick="handleSignup()">Register Now</button>
+                <p class="auth-footer">Already registered? <a href="#" onclick="toggleAuth()">Sign In</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. USER DASHBOARD VIEW -->
+    <section id="user-dashboard" class="view hidden">
+        <!-- PREMIUM GREEN SIDEBAR -->
+        <nav class="sidebar-green">
+            <div class="sb-header">
+                <div class="logo-box">
+                    <i class="fas fa-leaf"></i>
+                    <span>UniSolve</span>
+                </div>
+            </div>
+
+            <div class="sb-search">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search support...">
+            </div>
+
+            <div class="sb-section">
+                <label>CORE MENU</label>
+                <button class="sb-link active" id="btn-dash" onclick="showUserHome()">
+                    <i class="fas fa-th-large"></i> Dashboard
+                </button>
+                <button class="sb-link" id="btn-hist" onclick="viewChatHistory()">
+                    <i class="fas fa-history"></i> Chat History
+                    <span class="badge" id="history-count">0</span>
+                </button>
+            </div>
+
+            <div class="sb-section">
+                <label>QUICK ACCESS</label>
+                <button class="sb-link-small" onclick="openChat('Student Support')">
+                    <i class="fas fa-user-graduate"></i> Student IT
+                </button>
+                <button class="sb-link-small" onclick="openChat('Finance')">
+                    <i class="fas fa-wallet"></i> Finance & Fees
+                </button>
+                <button class="sb-link-small" onclick="openChat('Entertainment')">
+                    <i class="fas fa-gamepad"></i> Entertainment
+                </button>
+            </div>
+
+            <div class="sb-profile">
+                <div class="user-info">
+                    <img src="https://ui-avatars.com/api/?name=User&background=10b981&color=fff" id="user-avatar" alt="User">
+                    <div class="user-details">
+                        <p id="sb-user-name">Loading...</p>
+                        <small><i class="fas fa-circle"></i> Online</small>
+                    </div>
+                </div>
+                <button class="sb-logout" onclick="logout()" title="Logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </nav>
+
+        <!-- USER MAIN CONTENT Area -->
+        <main class="main-content-green">
+            
+            <!-- Dashboard Grid -->
+            <div id="user-home" class="animate__animated animate__fadeIn">
+                <div class="welcome-header">
+                    <h2 id="welcome-msg">Hello, Student! 👋</h2>
+                    <p>How can we assist you with your university life today?</p>
+                </div>
+                
+                <div class="sector-grid">
+                    <div class="sector-card s-blue" onclick="openChat('Student Support')">
+                        <div class="icon-box"><i class="fas fa-laptop-code"></i></div>
+                        <h4>Student Support</h4>
+                        <span>Canvas, IT Support, Gmail</span>
+                    </div>
+                    <div class="sector-card s-purple" onclick="openChat('Entertainment')">
+                        <div class="icon-box"><i class="fas fa-clapperboard"></i></div>
+                        <h4>Entertainment</h4>
+                        <span>Clubs, Events & Sports</span>
+                    </div>
+                    <div class="sector-card s-green" onclick="openChat('Finance')">
+                        <div class="icon-box"><i class="fas fa-file-invoice-dollar"></i></div>
+                        <h4>Finance & Business</h4>
+                        <span>Fees, Grants, Payments</span>
+                    </div>
+                    <div class="sector-card s-orange" onclick="openChat('General')">
+                        <div class="icon-box"><i class="fas fa-comments"></i></div>
+                        <h4>General Queries</h4>
+                        <span>Anything else you need</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat History View -->
+            <div id="chat-history-view" class="hidden animate__animated animate__fadeIn">
+                <div class="view-header">
+                    <h2><i class="fas fa-history"></i> My Recent Conversations</h2>
+                    <p>Click on a ticket to continue the conversation</p>
+                </div>
+                <div id="history-list" class="history-container">
+                    <!-- History cards injected here -->
+                </div>
+            </div>
+
+            <!-- Real-time Chat Interface -->
+            <div id="chat-interface" class="hidden animate__animated animate__zoomIn">
+                <div class="chat-window glass">
+                    <div class="chat-header">
+                        <button class="back-btn" onclick="showUserHome()"><i class="fas fa-chevron-left"></i></button>
+                        <div class="chat-title-info">
+                            <h3 id="current-sector-title">Sector Name</h3>
+                            <small>Admin is online to help you</small>
+                        </div>
+                    </div>
+                    <div id="chat-box" class="chat-messages">
+                        <!-- Messages injected here -->
+                    </div>
+                    <div class="chat-input-area">
+                        <input type="text" id="msg-input" placeholder="Type your query here...">
+                        <button class="send-btn" onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </section>
+
+    <!-- 3. ADMIN DASHBOARD VIEW -->
+<section id="admin-dashboard" class="view hidden">
+    <!-- ADMIN SIDEBAR -->
+    <nav class="sidebar-green admin-theme">
+        <div class="sb-header">
+            <div class="logo-box">
+                <i class="fas fa-user-shield"></i>
+                <span>UniAdmin</span>
+            </div>
+        </div>
+
+        <div class="sb-section">
+            <label>SYSTEM</label>
+            <button class="sb-link active" id="admin-btn-dash" onclick="showAdminTab('admin-stats-view')">
+                <i class="fas fa-chart-pie"></i> Overview
+            </button>
+            <button class="sb-link" id="admin-btn-users" onclick="showAdminTab('admin-users-view')">
+                <i class="fas fa-users-gear"></i> Manage Users
+            </button>
+            <button class="sb-link" id="admin-btn-chats" onclick="showAdminTab('admin-chats-view')">
+                <i class="fas fa-comment-dots"></i> Live Support
+                <span class="badge animate__animated animate__pulse animate__infinite" id="admin-msg-count">0</span>
+            </button>
+        </div>
+
+        <div class="sb-profile">
+            <div class="user-info">
+                <img src="https://ui-avatars.com/api/?name=Admin&background=064e3b&color=fff" alt="Admin">
+                <div class="user-details">
+                    <p>System Admin</p>
+                    <small>Root Access</small>
+                </div>
+            </div>
+            <button class="sb-logout" onclick="logout()"><i class="fas fa-power-off"></i></button>
+        </div>
+    </nav>
+
+    <!-- ADMIN MAIN CONTENT -->
+    <main class="main-content-green">
+        
+        <!-- TAB 1: OVERVIEW STATS -->
+        <div id="admin-stats-view" class="admin-tab animate__animated animate__fadeIn">
+            <h2 class="view-title">System Overview</h2>
+            <div class="stats-grid">
+                <div class="stat-card glass">
+                    <h3 id="stat-total-users">0</h3>
+                    <p>Total Registered</p>
+                </div>
+                <div class="stat-card glass">
+                    <h3 id="stat-active-sessions">0</h3>
+                    <p>Active Chats</p>
+                </div>
+                <div class="stat-card glass">
+                    <h3 id="stat-total-msgs">0</h3>
+                    <p>Total Messages</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: USER MANAGEMENT (CRUD) -->
+        <div id="admin-users-view" class="admin-tab hidden animate__animated animate__fadeIn">
+            <div class="view-header-flex">
+                <h2 class="view-title">User Management</h2>
+                <button class="btn-primary" style="width:auto; padding: 10px 20px;" onclick="adminAddUser()">+ Add User</button>
+            </div>
+            <div class="table-container glass">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>User Name</th>
+                            <th>Email Address</th>
+                            <th>Role</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="user-table-body">
+                        <!-- User rows injected here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- TAB 3: LIVE SUPPORT (Active Chats) -->
+        <div id="admin-chats-view" class="admin-tab hidden animate__animated animate__fadeIn">
+            <div class="admin-chat-layout">
+                <!-- Chat Queue (Left) -->
+                <div class="chat-queue glass">
+                    <h3>Active Tickets</h3>
+                    <div id="admin-queue-list">
+                        <!-- List of users waiting for help -->
+                    </div>
+                </div>
+                <!-- Active Chat Box (Right) -->
+                <div class="admin-chat-window glass" id="admin-chat-window">
+                    <div id="admin-chat-placeholder">
+                        <i class="fas fa-comments"></i>
+                        <p>Select a ticket to respond</p>
+                    </div>
+                    <!-- This will show the actual chat when a user is selected -->
+                    <div id="admin-active-chat-box" class="hidden">
+                        <div class="chat-header">
+                            <h4 id="admin-chat-target">Student Name</h4>
+                            <small id="admin-chat-sector">Sector</small>
+                        </div>
+                        <div id="admin-messages" class="chat-messages"></div>
+                        <div class="chat-input-area">
+                            <input type="text" id="admin-reply-input" placeholder="Type response...">
+                            <button class="send-btn" onclick="adminSendReply()"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</section>
+
+    <!-- Project Script -->
+    <script src="script.js"></script>
+</body>
+</html>
