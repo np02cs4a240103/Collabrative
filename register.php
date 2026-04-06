@@ -18,6 +18,22 @@ if (empty($fullname) || empty($email) || empty($password)) {
     exit;
 }
 
+if (!str_ends_with(strtolower($email), '@bicnepal.edu.np')) {
+    echo json_encode(['success' => false, 'message' => 'Only @bicnepal.edu.np email is allowed']);
+    exit;
+}
+
+if (strlen($password) < 6) {
+    echo json_encode(['success' => false, 'message' => 'Password must be at least 6 characters']);
+    exit;
+}
+
+$stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
+$stmt->execute([$email]);
+if ($stmt->fetch()) {
+    echo json_encode(['success' => false, 'message' => 'Email already registered']);
+    exit;
+}
 
 // Hash the password before storing it in the database
 $hashed = password_hash($password, PASSWORD_DEFAULT);
