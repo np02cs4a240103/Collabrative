@@ -1,3 +1,6 @@
+CREATE DATABASE IF NOT EXISTS helpdesk_db;
+USE helpdesk_db;
+
 CREATE TABLE departments (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
