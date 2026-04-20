@@ -2,12 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"><title>UniSolve | Admin Panel</title>
+    <!-- Google Fonts for Poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Animate.css for animations -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <!-- Custom styles -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="view">
+    <!-- Sidebar navigation for admin -->
     <nav class="sidebar-green admin-theme">
         <div class="sb-header"><div class="logo-box"><i class="fas fa-user-shield"></i><span>UniAdmin</span></div></div>
         <div class="sb-section">
@@ -18,6 +23,7 @@
         <button class="sb-logout" onclick="globalLogout()" style="margin-top:auto"><i class="fas fa-power-off"></i> Logout</button>
     </nav>
 
+    <!-- Main content area -->
     <main class="main-content-green">
        
         <!-- TAB 1: OVERVIEW -->
@@ -28,6 +34,7 @@
                 <button class="btn-primary" onclick="openAdminTicketForm()" style="width:auto">+ Internal Ticket</button>
             </div>
             
+            <!-- Statistics cards -->
             <div class="stats-grid">
                 <div class="stat-card glass"><h3 id="stat-total-users">0</h3><p>Users</p></div>
                 <div class="stat-card glass"><h3 id="stat-active-sessions">0</h3><p>Active Tickets</p></div>
@@ -109,6 +116,7 @@
         <div id="admin-chats-view" class="admin-tab hidden animate__animated animate__fadeIn">
             <div class="admin-chat-layout">
                 
+                <!-- Active Tickets Queue -->
                 <div class="chat-queue glass">
                     <h3>Active Tickets</h3>
                     <div id="admin-queue-list"></div>
@@ -143,6 +151,7 @@
         </div>
     </main>
 
+    <!-- Scripts -->
     <script src="js/core.js"></script>
     <script src="js/admin.js"></script>
 </body>

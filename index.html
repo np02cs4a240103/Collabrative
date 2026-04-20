@@ -4,16 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UniSolve HelpDesk | Student Support</title>
+    <!-- Google Fonts for Poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Animate.css for animations -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <!-- Custom styles -->
     <link rel="stylesheet" href="css/style.css">
 
 </head>
 <body>
+    <!-- Animated background circles -->
     <div class="bg-circles"><div class="circle"></div><div class="circle"></div></div>
 
+    <!-- Landing Page Section -->
     <section id="landing-page" class="view">
+        <!-- Navigation bar -->
         <nav class="landing-nav glass">
             <div class="logo-box"><i class="fas fa-leaf"></i><span>UniSolve</span></div>
             <div class="nav-menu">
@@ -23,6 +30,7 @@
             </div>
         </nav>
 
+        <!-- Hero section -->
         <header class="hero animate__animated animate__fadeIn">
             <div class="hero-content">
                 <h1>Empowering Students, <br><span class="text-green">One Solution</span> at a Time.</h1>
@@ -37,6 +45,7 @@
             </div>
         </header>
 
+        <!-- About section -->
         <section id="about" class="landing-section">
             <div class="section-container">
                 <div class="info-card glass">
@@ -50,6 +59,7 @@
             </div>
         </section>
 
+        <!-- Team section -->
         <section id="team" class="landing-section">
             <h2 class="section-title">Meet the Team</h2>
             <div class="team-grid">
@@ -66,14 +76,19 @@
             </div>
         </section>
 
+        <!-- Footer -->
         <footer class="landing-footer"><p>&copy; 2024 UniSolve HelpDesk Project.</p></footer>
     </section>
 
+    <!-- Authentication Section -->
     <section id="auth-section" class="view hidden animate__animated animate__fadeIn">
         <div class="auth-card glass">
+            <!-- Back to home button -->
             <button class="back-to-home" onclick="backToLanding()"><i class="fas fa-arrow-left"></i> Back to Home </button>
 
+            <!-- Auth logo -->
             <div class="auth-logo"><i class="fas fa-graduation-cap"></i><h1>UniSolve</h1></div>
+            <!-- Login form -->
             <div id="login-form">
                 <div class="input-group"><i class="fas fa-envelope"></i><input type="email" id="login-email" placeholder="University Email"></div>
                 <div class="input-group"><i class="fas fa-lock"></i><input type="password" id="login-pass" placeholder="Password"></div>
@@ -81,6 +96,7 @@
                 <p class="auth-footer">New student? <a href="#" onclick="toggleAuth()">Create Account</a></p>
             </div>
 
+            <!-- Signup form -->
             <div id="signup-form" class="hidden">
                 <div class="input-group"><i class="fas fa-user"></i><input type="text" id="reg-name" placeholder="Full Name"></div>
                 <div class="input-group"><i class="fas fa-envelope"></i><input type="email" id="reg-email" placeholder="Email Address"></div>
@@ -91,8 +107,10 @@
         </div>
     </section>
 
+    <!-- Core JavaScript -->
     <script src="js/core.js"></script>
     <script>
+        // Function to transition to auth section
         function enterApp() {
             document.getElementById('landing-page').classList.add('animate__animated', 'animate__fadeOut');
             setTimeout(() => {
@@ -101,11 +119,13 @@
             }, 500);
         }
 
+        // Toggle between login and signup forms
         function toggleAuth() {
             document.getElementById('login-form').classList.toggle('hidden');
             document.getElementById('signup-form').classList.toggle('hidden');
         }
 
+        // Handle login logic
         function handleLogin() {
             const email = document.getElementById('login-email').value;
             if (email === "admin@uni.com") {
@@ -122,6 +142,7 @@
             }
         }
 
+        // Handle signup logic
         function handleSignup() {
             const name = document.getElementById('reg-name').value;
             const email = document.getElementById('reg-email').value;
@@ -133,6 +154,7 @@
             }
         }
 
+        // Function to go back to landing page
         function backToLanding() {
             const landing = document.getElementById('landing-page');
             const auth = document.getElementById('auth-section');
