@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/db.php';
+require_once __DIR__ . '/session_helper.php';
 
-session_start();
 header('Content-Type: application/json');
 
 function sanitizeInput($data) {
@@ -14,13 +14,14 @@ function jsonResponse($status, $message, $data = null) {
     exit;
 }
 
-if (!isset($_SESSION['user_id'])) {
+$sessionUser = getSessionUser();
+if (!$sessionUser) {
     jsonResponse("error", "Unauthorized access. Please log in.");
 }
 
-$action = isset($_GET['action']) ? $_GET['action'] : '';
-$user_id = $_SESSION['user_id'];
-$role = $_SESSION['role'];
+$action  = isset($_GET['action']) ? $_GET['action'] : '';
+$user_id = $sessionUser['user_id'];
+$role    = $sessionUser['role'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if ($action === 'list') {
@@ -106,7 +107,13 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $pdo->prepare("INSERT INTO tickets (title, description, user_id, department_id, priority) VALUES (?, ?, ?, ?, ?)");
         
         if ($stmt->execute([$title, $description, $user_id, $department_id, $priority])) {
-            jsonResponse("success", "Ticket created successfully");
+            $ticket_id = $pdo->lastInsertId();
+            
+            // Auto-insert the ticket description as the first chat message
+            $msg_stmt = $pdo->prepare("INSERT INTO messages (ticket_id, sender_id, message) VALUES (?, ?, ?)");
+            $msg_stmt->execute([$ticket_id, $user_id, $description]);
+            
+            jsonResponse("success", "Ticket created successfully", ["ticket_id" => $ticket_id]);
         } else {
             jsonResponse("error", "Failed to create ticket");
         }

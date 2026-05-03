@@ -121,7 +121,10 @@
         <div class="chat-window glass">
             <div class="chat-header">
                 <button class="back-btn" onclick="showUserHome()"><i class="fas fa-chevron-left"></i></button>
-                <h3 id="current-sector-title">Sector</h3>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <h3 id="current-sector-title">Sector</h3>
+                    <span id="current-ticket-status" class="status-badge" style="font-size: 0.8rem; padding: 2px 8px;">status</span>
+                </div>
             </div>
             <div id="chat-box" class="chat-messages"></div>
             <div class="chat-input-area">
@@ -132,8 +135,8 @@
     </div>
 </main>
 
-<script src="js/core.js"></script>
-<script src="js/user.js"></script>
+<script src="js/core.js?v=5"></script>
+<script src="js/user.js?v=5"></script>
 
 </body>
 </html>

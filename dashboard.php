@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/db.php';
-session_start();
+require_once __DIR__ . '/session_helper.php';
+
 header('Content-Type: application/json');
 
 function jsonResponse($status, $message, $data = null) {
@@ -8,18 +9,19 @@ function jsonResponse($status, $message, $data = null) {
     exit;
 }
 
-if (!isset($_SESSION['user_id'])) {
+$sessionUser = getSessionUser();
+if (!$sessionUser) {
     jsonResponse("error", "Unauthorized access. Please log in.");
 }
 
-$user_id = $_SESSION['user_id'];
-$role = $_SESSION['role'];
+$user_id = $sessionUser['user_id'];
+$role    = $sessionUser['role'];
 
 $stats = [
-    'Open' => 0,
-    'In Progress' => 0,
-    'Resolved' => 0,
-    'Closed' => 0
+    'notstarted' => 0,
+    'started' => 0,
+    'process' => 0,
+    'solved' => 0
 ];
 
 if ($role === 'Admin') {
@@ -65,6 +67,6 @@ jsonResponse("success", "Dashboard data", [
     "stats" => $stats,
     "recent_tickets" => $recent_tickets,
     "total_users" => $total_users,
-    "total_msgs" => 0 // Mock value since there is no messages table
+    "total_msgs" => $pdo->query("SELECT COUNT(*) FROM messages")->fetchColumn()
 ]);
 ?>
