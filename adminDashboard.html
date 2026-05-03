@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>UniSolve | Admin Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="view">
+    <nav class="sidebar-green admin-theme">
+        <div class="sb-header">
+            <div class="logo-box"><i class="fas fa-user-shield"></i><span>UniAdmin</span></div>
+        </div>
+        <div class="sb-section">
+            <button class="sb-link active" onclick="showAdminTab('admin-stats-view')"><i class="fas fa-chart-pie"></i>
+                Overview</button>
+            <button class="sb-link" onclick="showAdminTab('admin-users-view')"><i class="fas fa-users-gear"></i>
+                Users</button>
+            <button class="sb-link" onclick="showAdminTab('admin-chats-view')"><i class="fas fa-comment-dots"></i> Live
+                <span class="badge" id="admin-msg-count">0</span></button>
+        </div>
+        <button class="sb-logout" onclick="globalLogout()" style="margin-top:auto"><i class="fas fa-power-off"></i>
+            Logout</button>
+    </nav>
+
+    <main class="main-content-green">
+
+        <!-- TAB 1: OVERVIEW -->
+        <div id="admin-stats-view" class="admin-tab animate__animated animate__fadeIn">
+            <div class="view-header-flex">
+                <h2 class="view-title">System Overview</h2>
+                <!-- Fixed: Internal Ticket Button now here in Overview -->
+                <button class="btn-primary" onclick="openAdminTicketForm()" style="width:auto">+ Internal
+                    Ticket</button>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card glass">
+                    <h3 id="stat-total-users">0</h3>
+                    <p>Users</p>
+                </div>
+                <div class="stat-card glass">
+                    <h3 id="stat-active-sessions">0</h3>
+                    <p>Active Tickets</p>
+                </div>
+                <div class="stat-card glass">
+                    <h3 id="stat-total-msgs">0</h3>
+                    <p>Messages</p>
+                </div>
+            </div>
+
+            <!-- NEW: User Issues Displayed Under Stats -->
+            <h3 style="margin: 30px 0 15px 0; color: var(--green-deep);">Recent User Issues</h3>
+            <div class="table-container glass">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Issue Type</th>
+                            <th>Priority</th>
+                            <th>Status</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recent-tickets-table">
+                        <!-- Tickets injected here via admin.js -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- TAB 2: USER MANAGEMENT -->
+        <div id="admin-users-view" class="admin-tab hidden animate__animated animate__fadeIn">
+            <div class="view-header-flex">
+                <h2>Manage Users</h2>
+                <button class="btn-primary" onclick="adminAddUser()" style="width:auto">+ Add User</button>
+            </div>
+
+            <div class="table-container glass">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="user-table-body"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- TAB 3: ADMIN TICKET FORM (Centered) -->
+        <div id="admin-ticket-form-view" class="hidden animate__animated animate__fadeIn">
+            <div class="ticket-form glass">
+                <div class="view-header">
+                    <button class="back-btn" onclick="showAdminTab('admin-stats-view')"><i
+                            class="fas fa-arrow-left"></i></button>
+                    <h2>Raise Internal Ticket</h2>
+                </div>
+
+                <div class="input-group-vertical">
+                    <label>Internal Category</label>
+                    <select id="admin-issue-type">
+                        <option value="System Maintenance">System Maintenance</option>
+                        <option value="Security Update">Security Update</option>
+                        <option value="Database Check">Database Check</option>
+                        <option value="General Admin">General Admin</option>
+                    </select>
+                </div>
+
+                <div class="input-group-vertical">
+                    <label>Priority</label>
+                    <select id="admin-ticket-priority">
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High (Immediate Action)</option>
+                    </select>
+                </div>
+
+                <div class="input-group-vertical">
+                    <label>Description</label>
+                    <textarea id="admin-issue-description" rows="4" placeholder="Note the internal issue..."></textarea>
+                </div>
+
+                <button class="btn-primary" onclick="submitAdminTicket()">Create Ticket <i
+                        class="fas fa-plus"></i></button>
+            </div>
+        </div>
+
+        <!-- TAB 4: LIVE CHAT -->
+        <div id="admin-chats-view" class="admin-tab hidden animate__animated animate__fadeIn">
+            <div class="admin-chat-layout">
+
+                <div class="chat-queue glass">
+                    <h3>Active Tickets</h3>
+                    <div id="admin-queue-list"></div>
+                </div>
+
+                <!-- Active Chat Box (Right) -->
+                <div class="admin-chat-window glass">
+                    <div id="admin-active-chat-box" class="hidden">
+                        <!-- UI IMPROVEMENT: Button moved to Header for better UX -->
+                        <div class="chat-header"
+                            style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                            <div>
+                                <h4 id="admin-chat-target">Student Name</h4>
+                                <small id="admin-chat-sector"
+                                    style="color: var(--green-primary); font-weight: 600;">Sector Name</small>
+                            </div>
+                            <select id="admin-ticket-status" class="status-badge"
+                                onchange="updateTicketStatus(this.value)"
+                                style="padding: 5px; border-radius: 5px; border: 1px solid var(--green-light);">
+                                <option value="notstarted">Not Started</option>
+                                <option value="started">Started</option>
+                                <option value="process">In Process</option>
+                                <option value="solved">Solved</option>
+                                <option value="closed">Closed</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Messages Area -->
+                    <div id="admin-messages" class="chat-messages"></div>
+
+                    <!-- Input Area -->
+                    <div class="chat-input-area" id="admin-chat-input-area" style="display: none;">
+                        <input type="text" id="admin-reply-input" placeholder="Type your response...">
+                        <button class="send-btn" onclick="adminSendReply()">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- USER MODAL (Add/Edit) -->
+    <div id="user-modal" class="modal hidden">
+        <div class="modal-content glass animate__animated animate__zoomIn">
+            <h2 id="user-modal-title">Add User</h2>
+            <input type="hidden" id="user-id">
+
+            <div class="input-group-vertical">
+                <label>Name</label>
+                <input type="text" id="user-name" placeholder="Full Name">
+            </div>
+            <div class="input-group-vertical">
+                <label>Email</label>
+                <input type="email" id="user-email" placeholder="Email Address">
+            </div>
+            <div class="input-group-vertical">
+                <label>Password (leave blank to keep current if editing)</label>
+                <input type="password" id="user-password" placeholder="Password">
+            </div>
+            <div class="input-group-vertical">
+                <label>Role</label>
+                <select id="user-role" onchange="toggleDepartmentSelect()">
+                    <option value="Student">Student</option>
+                    <option value="Staff">Staff</option>
+                    <option value="Admin">Admin</option>
+                </select>
+            </div>
+            <div class="input-group-vertical" id="user-dept-group" style="display: none;">
+                <label>Department (for Staff)</label>
+                <select id="user-department">
+                    <option value="">Select Department</option>
+                    <option value="1">IT Support</option>
+                    <option value="2">Administration</option>
+                    <option value="3">Finance</option>
+                    <option value="4">Library</option>
+                    <option value="5">Examination</option>
+                </select>
+            </div>
+
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <button class="btn-primary" onclick="saveUser()">Save</button>
+                <button class="btn-secondary" onclick="closeUserModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/core.js?v=5"></script>
+    <script src="js/admin.js?v=5"></script>
+</body>
+
+</html>
