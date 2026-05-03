@@ -27,7 +27,9 @@ if ($user && password_verify($password, $user['password'])) {
     echo json_encode([
         'success' => true,
         'message' => 'Login successful',
-        'role'    => $user['role']  
+        'id'      => $user['id'],
+        'role'    => $user['role'],
+        'name'    => $user['name']
     ]);
 } else {
     echo json_encode(['success' => false, 'message' => 'Invalid email or password']);
