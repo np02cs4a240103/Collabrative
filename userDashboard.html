@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><title>UniSolve | Student Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="view">
+
+<!-- SIDEBAR -->
+<nav class="sidebar-green">
+    <div class="sb-header">
+        <div class="logo-box">
+            <i class="fas fa-leaf"></i>
+            <span>UniSolve</span>
+        </div>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="sb-search">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Search support...">
+    </div>
+
+    <div class="sb-section">
+        <label>CORE MENU</label>
+        <button class="sb-link active" id="btn-dash" onclick="showUserHome()">
+            <i class="fas fa-th-large"></i> Dashboard
+        </button>
+        <button class="sb-link" id="btn-hist" onclick="viewChatHistory()">
+            <i class="fas fa-history"></i> Chat History
+            <span class="badge" id="history-count">0</span>
+        </button>
+    </div>
+
+    <div class="sb-section">
+        <label>QUICK ACCESS</label>
+        <button class="sb-link-small" onclick="openChat('Student Support')">
+            <i class="fas fa-user-graduate"></i> Student IT
+        </button>
+        <button class="sb-link-small" onclick="openChat('Finance')">
+            <i class="fas fa-wallet"></i> Finance & Fees
+        </button>
+        <button class="sb-link-small" onclick="openChat('Entertainment')">
+            <i class="fas fa-gamepad"></i> Entertainment
+        </button>
+    </div>
+
+    <div class="sb-profile">
+    <div class="user-info">
+        <div class="avatar-initials">--</div> 
+        
+        <div class="user-details">
+            <p id="sb-user-name">Loading...</p>
+            <small><i class="fas fa-circle"></i> Online</small>
+        </div>
+    </div>
+    <button class="sb-logout" onclick="globalLogout()">
+        <i class="fas fa-sign-out-alt"></i>
+    </button>
+</div>
+</nav>
+
+<!-- MAIN CONTENT CARDS -->
+<main class="main-content-green">
+    <!-- 1. DASHBOARD HOME -->
+    <div id="user-home" class="animate__animated animate__fadeIn">
+        <div class="welcome-header"><h2 id="welcome-msg">Hello!</h2><p>How can we assist you today?</p></div>
+        <div class="sector-grid">
+            <div class="sector-card s-blue" onclick="openChat('Student Support')"><div class="icon-box"><i class="fas fa-laptop-code"></i></div><h4>Student Support</h4>
+            <span>Canvas, IT Support, Gmail</span></div>
+            <div class="sector-card s-green" onclick="openChat('Finance')"><div class="icon-box"><i class="fas fa-file-invoice-dollar"></i></div><h4>Finance</h4>
+            <span>Fees, Grants, Payments</span></div>
+            <div class="sector-card s-purple" onclick="openChat('Entertainment')"><div class="icon-box"><i class="fas fa-gamepad"></i></div><h4>Entertainment</h4>
+            <span>Clubs, Events & Sports</span></div>
+            <div class="sector-card s-orange" onclick="openChat('General')"> <div class="icon-box"><i class="fas fa-comments"></i></div><h4>General Queries</h4>
+            <span>Anything else you need</span></div>
+        </div>
+    </div>
+
+    <!-- 2. TICKET FORM VIEW -->
+    <div id="ticket-form-view" class="hidden animate__animated animate__fadeIn">
+        <div class="ticket-form glass">
+            <div class="view-header">
+                <button class="back-btn" onclick="showUserHome()"><i class="fas fa-arrow-left"></i></button>
+                <h2 id="form-title">Raise Ticket</h2>
+            </div>
+            
+            <div class="input-group-vertical">
+                <label>Type of Issue</label>
+                <input type="text" id="issue-type" readonly style="background: #f1f5f9; cursor: not-allowed;">
+            </div>
+            
+            <div class="input-group-vertical">
+                <label>Priority Level</label>
+                <select id="ticket-priority">
+                    <option value="Low">Low - General Query</option>
+                    <option value="Medium">Medium - Urgent</option>
+                    <option value="High">High - Critical</option>
+                </select>
+            </div>
+            
+            <div class="input-group-vertical">
+                <label>Description</label>
+                <textarea id="issue-description" rows="4" placeholder="Describe your issue..."></textarea>
+            </div>
+            <button class="btn-primary" onclick="submitTicket()">Raise Ticket & Start Chat <i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <!-- 3. CHAT HISTORY VIEW -->
+    <div id="chat-history-view" class="hidden animate__animated animate__fadeIn">
+        <h2>My Recent Conversations</h2>
+        <div id="history-list" class="history-container"></div>
+    </div>
+
+    <!-- 4. REAL-TIME CHAT INTERFACE -->
+    <div id="chat-interface" class="hidden animate__animated animate__zoomIn">
+        <div class="chat-window glass">
+            <div class="chat-header">
+                <button class="back-btn" onclick="showUserHome()"><i class="fas fa-chevron-left"></i></button>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <h3 id="current-sector-title">Sector</h3>
+                    <span id="current-ticket-status" class="status-badge" style="font-size: 0.8rem; padding: 2px 8px;">status</span>
+                </div>
+            </div>
+            <div id="chat-box" class="chat-messages"></div>
+            <div class="chat-input-area">
+                <input type="text" id="msg-input" placeholder="Type here...">
+                <button class="send-btn" onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="js/core.js?v=5"></script>
+<script src="js/user.js?v=5"></script>
+
+</body>
+</html>

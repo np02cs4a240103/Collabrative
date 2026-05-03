@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniSolve HelpDesk | Student Support</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+    <div class="bg-circles">
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+
+    <section id="landing-page" class="view">
+        <nav class="landing-nav glass">
+            <div class="logo-box"><i class="fas fa-leaf"></i><span>UniSolve</span></div>
+            <div class="nav-menu">
+                <a href="#about">About</a>
+                <a href="#team">Creators</a>
+                <button class="btn-login-trigger" onclick="enterApp()">Get Started</button>
+            </div>
+        </nav>
+
+        <header class="hero animate__animated animate__fadeIn">
+            <div class="hero-content">
+                <h1>Empowering Students, <br><span class="text-green">One Solution</span> at a Time.</h1>
+                <p>The central hub for IT support, finance queries, and university life. Built by students, for
+                    students.</p>
+                <div class="hero-btns">
+                    <button class="btn-primary-large" onclick="enterApp()">Launch HelpDesk <i
+                            class="fas fa-rocket"></i></button>
+                    <a href="#about" class="btn-secondary-large">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-image animate__animated animate__zoomIn">
+                <img src="https://illustrations.popsy.co/emerald/remote-work.svg" alt="Support">
+            </div>
+        </header>
+
+        <section id="about" class="landing-section">
+            <div class="section-container">
+                <div class="info-card glass">
+                    <i class="fas fa-bullseye"></i>
+                    <h3>Our Motive</h3>
+                    <p>UniSolve provides a real-time, centralized interface where students get answers instantly.</p>
+                </div>
+                <div class="info-card glass">
+                    <i class="fas fa-heart"></i>
+                    <h3>Student-Centric</h3>
+                    <p>We prioritize your academic flow, ensuring you spend less time worrying and more time learning.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="team" class="landing-section">
+            <h2 class="section-title">Meet the Team</h2>
+            <div class="team-grid">
+                <div class="team-card glass"><img
+                        src="https://ui-avatars.com/api/?name=Ranjan+Katwal&background=10b981&color=fff" alt="Ranjan">
+                    <h4>Ranjan Katwal</h4>
+                    <p class="role-title">Project Manager</p>
+                </div>
+                <div class="team-card glass"><img
+                        src="https://ui-avatars.com/api/?name=Nayan&background=10b981&color=fff" alt="Nayan">
+                    <h4>Nayan</h4>
+                    <p class="role-title">Business Analyst</p>
+                </div>
+                <div class="team-card glass"><img
+                        src="https://ui-avatars.com/api/?name=Sara+Ghimire+Kshetri&background=10b981&color=fff"
+                        alt="Sara">
+                    <h4>Sara Ghimire Kshetri</h4>
+                    <p class="role-title">Frontend Developer</p>
+                </div>
+                <div class="team-card glass"><img
+                        src="https://ui-avatars.com/api/?name=Krishna+Nayak&background=10b981&color=fff" alt="Krishna">
+                    <h4>Krishna Nayak</h4>
+                    <p class="role-title">Backend Developer</p>
+                </div>
+                <div class="team-card glass"><img
+                        src="https://ui-avatars.com/api/?name=Roman+Poudel&background=10b981&color=fff" alt="Roman">
+                    <h4>Roman Poudel</h4>
+                    <p class="role-title">Backend Developer</p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="landing-footer">
+            <p>&copy; 2024 UniSolve HelpDesk Project.</p>
+        </footer>
+    </section>
+
+    <section id="auth-section" class="view hidden animate__animated animate__fadeIn">
+        <div class="auth-card glass">
+            <button class="back-to-home" onclick="backToLanding()"><i class="fas fa-arrow-left"></i> Back to Home
+            </button>
+
+            <div class="auth-logo"><i class="fas fa-graduation-cap"></i>
+                <h1>UniSolve</h1>
+            </div>
+            <div id="login-form">
+                <div class="input-group"><i class="fas fa-envelope"></i><input type="email" id="login-email"
+                        placeholder="University Email"></div>
+                <div class="input-group"><i class="fas fa-lock"></i><input type="password" id="login-pass"
+                        placeholder="Password"></div>
+                <button class="btn-primary" onclick="handleLogin()">Sign In</button>
+                <p class="auth-footer">New student? <a href="#" onclick="toggleAuth()">Create Account</a></p>
+            </div>
+
+            <div id="signup-form" class="hidden">
+                <div class="input-group"><i class="fas fa-user"></i><input type="text" id="reg-name"
+                        placeholder="Full Name"></div>
+                <div class="input-group"><i class="fas fa-envelope"></i><input type="email" id="reg-email"
+                        placeholder="Email Address"></div>
+                <div class="input-group"><i class="fas fa-lock"></i><input type="password" id="reg-pass"
+                        placeholder="Create Password"></div>
+                <button class="btn-primary" onclick="handleSignup()">Register Now</button>
+                <p class="auth-footer">Already registered? <a href="#" onclick="toggleAuth()">Sign In</a></p>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/core.js"></script>
+    <script>
+        function enterApp() {
+            document.getElementById('landing-page').classList.add('animate__animated', 'animate__fadeOut');
+            setTimeout(() => {
+                document.getElementById('landing-page').classList.add('hidden');
+                document.getElementById('auth-section').classList.remove('hidden');
+            }, 500);
+        }
+
+        function toggleAuth() {
+            document.getElementById('login-form').classList.toggle('hidden');
+            document.getElementById('signup-form').classList.toggle('hidden');
+        }
+
+        async function handleLogin() {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-pass').value;
+
+            if (!email || !password) {
+                alert("Please fill in both fields");
+                return;
+            }
+
+            try {
+                const response = await fetch('login.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                const result = await response.json();
+
+                if (result.success) {
+                    // Update global state and localStorage via core.js
+                    currentUser = { id: result.id, name: result.name || "User", role: result.role };
+                    localStorage.setItem('uni_current', JSON.stringify(currentUser));
+
+                    if (result.role === 'Admin') {
+                        window.location.href = 'adminDashboard.html';
+                    } else {
+                        window.location.href = 'userDashboard.html';
+                    }
+                } else {
+                    alert(result.message);
+                }
+            } catch (e) {
+                alert("Server error. Please try again.");
+            }
+        }
+
+        async function handleSignup() {
+            const name = document.getElementById('reg-name').value;
+            const email = document.getElementById('reg-email').value;
+            const password = document.getElementById('reg-pass').value;
+
+            if (!name || !email || !password) {
+                alert("Please fill in all fields.");
+                return;
+            }
+
+            try {
+                const response = await fetch('register.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, password })
+                });
+                const result = await response.json();
+
+                if (result.success) {
+                    alert(result.message);
+                    toggleAuth();
+                } else {
+                    alert(result.message);
+                }
+            } catch (e) {
+                alert("Server error. Please try again.");
+            }
+        }
+
+        function backToLanding() {
+            const landing = document.getElementById('landing-page');
+            const auth = document.getElementById('auth-section');
+
+            auth.classList.add('animate__animated', 'animate__fadeOut');
+
+            setTimeout(() => {
+                auth.classList.add('hidden');
+                auth.classList.remove('animate__fadeOut');
+
+                landing.classList.remove('hidden');
+                landing.classList.remove('animate__fadeOut');
+                landing.classList.add('animate__animated', 'animate__fadeIn');
+            }, 400);
+        }
+    </script>
+</body>
+
+</html>
