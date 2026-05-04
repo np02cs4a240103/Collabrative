@@ -84,17 +84,20 @@ async function fetchUsers() {
         const result = await response.json();
         if (result.success) {
             const tbody = document.getElementById('user-table-body');
-            tbody.innerHTML = result.data.map(u => `
-                <tr>
+            tbody.innerHTML = result.data.map(u => {
+                const isActive = parseInt(u.is_active);
+                return `
+                <tr style="${!isActive ? 'opacity: 0.55;' : ''}">
                     <td>${u.name}</td>
                     <td>${u.email}</td>
                     <td>${u.role} ${u.department_name ? `(${u.department_name})` : ''}</td>
                     <td>
-                        <button class="btn-primary" style="padding: 5px 10px; font-size: 0.8rem;" onclick='editUser(${JSON.stringify(u)})'><i class="fas fa-edit"></i></button>
-                        <button class="btn-secondary" style="padding: 5px 10px; font-size: 0.8rem;" onclick="deleteUser(${u.id})"><i class="fas fa-trash"></i></button>
+                        <button class="${isActive ? 'btn-danger' : 'btn-success'}" style="padding: 6px 16px; font-size: 0.8rem; border: none; border-radius: 6px; cursor: pointer; color: #fff; font-weight: 600; transition: all 0.2s ease;" onclick="toggleUserStatus(${u.id}, ${isActive})">
+                            <i class="fas ${isActive ? 'fa-ban' : 'fa-check-circle'}" style="margin-right: 4px;"></i>${isActive ? 'Disable' : 'Enable'}
+                        </button>
                     </td>
                 </tr>
-            `).join('');
+            `}).join('');
         }
     } catch (e) {
         console.error("Error fetching users", e);
@@ -181,10 +184,11 @@ async function saveUser() {
     }
 }
 
-async function deleteUser(id) {
-    if (!confirm("Are you sure you want to delete this user?")) return;
+async function toggleUserStatus(id, currentStatus) {
+    const action = currentStatus ? 'disable' : 'enable';
+    if (!confirm(`Are you sure you want to ${action} this user?`)) return;
     try {
-        const response = await fetch('users.php?action=delete', {
+        const response = await fetch('users.php?action=toggle_status', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id })
@@ -194,7 +198,7 @@ async function deleteUser(id) {
             alert(result.message);
             fetchUsers();
         } else {
-            alert(result.message || 'Error deleting user');
+            alert(result.message || 'Error updating user status');
         }
     } catch (e) {
         console.error(e);
