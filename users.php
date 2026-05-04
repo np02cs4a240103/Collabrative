@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/db.php';
-session_start();
+require_once __DIR__ . '/session_helper.php';
 header('Content-Type: application/json');
 
 function sanitizeInput($data) {
@@ -13,7 +13,8 @@ function jsonResponse($status, $message, $data = null) {
     exit;
 }
 
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'Admin') {
+$sessionUser = getSessionUser();
+if (!$sessionUser || $sessionUser['role'] !== 'Admin') {
     jsonResponse("error", "Unauthorized access.");
 }
 
@@ -21,7 +22,7 @@ $action = isset($_GET['action']) ? $_GET['action'] : '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if ($action === 'list') {
-        $stmt = $pdo->prepare("SELECT u.id, u.name, u.email, u.role, d.name as department_name FROM users u LEFT JOIN departments d ON u.department_id = d.id ORDER BY u.created_at DESC");
+        $stmt = $pdo->prepare("SELECT u.id, u.name, u.email, u.role, u.is_active, d.name as department_name FROM users u LEFT JOIN departments d ON u.department_id = d.id ORDER BY u.created_at DESC");
         $stmt->execute();
         $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
         jsonResponse("success", "Users retrieved", $users);
@@ -77,16 +78,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         } else {
             jsonResponse("error", "Failed to update user");
         }
-    } elseif ($action === 'delete') {
+    } elseif ($action === 'toggle_status') {
         $id = intval($data['id']);
-        if ($id === $_SESSION['user_id']) {
-            jsonResponse("error", "You cannot delete your own account");
+        if ($id === $sessionUser['user_id']) {
+            jsonResponse("error", "You cannot disable your own account");
         }
-        $stmt = $pdo->prepare("DELETE FROM users WHERE id = ?");
-        if ($stmt->execute([$id])) {
-            jsonResponse("success", "User deleted successfully");
+        // Get current status
+        $check = $pdo->prepare("SELECT is_active FROM users WHERE id = ?");
+        $check->execute([$id]);
+        $current = $check->fetchColumn();
+        $newStatus = $current ? 0 : 1;
+        $stmt = $pdo->prepare("UPDATE users SET is_active = ? WHERE id = ?");
+        if ($stmt->execute([$newStatus, $id])) {
+            $label = $newStatus ? 'enabled' : 'disabled';
+            jsonResponse("success", "User {$label} successfully");
         } else {
-            jsonResponse("error", "Failed to delete user");
+            jsonResponse("error", "Failed to update user status");
         }
     }
 }

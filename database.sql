@@ -17,6 +17,7 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL,
     role ENUM('Admin','Staff','Student') DEFAULT 'Student',
     department_id INT NULL,
+    is_active TINYINT(1) NOT NULL DEFAULT 1,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
     FOREIGN KEY (department_id)
