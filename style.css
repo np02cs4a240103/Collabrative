@@ -594,6 +594,30 @@ body.view {
     transform: scale(1.1);
 }
 
+/* TEAM SECTION IMPROVEMENTS */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+    justify-content: center;
+}
+
+.team-card {
+    padding: 30px 20px;
+    border-radius: 24px;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.team-card:hover {
+    transform: translateY(-10px);
+    background: white;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+}
+
 /* --- MAIN CONTENT AREA --- */
 .view {
     display: flex;
