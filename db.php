@@ -1,6 +1,6 @@
 <?php
 $host     = 'localhost';
-$dbname   = 'helpdesk_db';
+$dbname   = 'unisolve';
 $username = 'root';
 $password = '';
 
