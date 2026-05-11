@@ -12,6 +12,20 @@ document.addEventListener('DOMContentLoaded', () => {
     initUI();
 });
 
+// Function to initialize user interface
+function initUI() {
+    // Get user name or default
+    const name = currentUser.name || "User";
+    // Update sidebar user name
+    document.getElementById('sb-user-name').innerText = name;
+    // Update welcome message
+    document.getElementById('welcome-msg').innerText = `Hello, ${name}! 👋`;
+    
+    // Set initials for avatar
+    const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+    document.querySelector('.avatar-initials').innerText = initials;
+}
+
 // UI LOGIC: Switches views to open chat for a sector
 function openChat(sector) {
     // Set active sector
