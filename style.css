@@ -895,6 +895,33 @@ body.view {
     margin-bottom: 25px;
 }
 
+/* Back to Home Link in Auth Card */
+.back-to-home {
+    background: none;
+    border: none;
+    color: #64748b;
+    /* Slate grey */
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    transition: 0.3s ease;
+    padding: 0;
+}
+
+.back-to-home:hover {
+    color: var(--green-primary);
+    transform: translateX(-5px);
+    /* Subtle slide effect */
+}
+
+.back-to-home i {
+    font-size: 0.8rem;
+}
+
 /* --- ADMIN STATS --- */
 .stats-grid {
     display: grid;
