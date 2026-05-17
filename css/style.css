@@ -1,6 +1,5 @@
 /* --- ROOT VARIABLES --- */
-/* Add this to your HTML <head> for Poppins font: */
-/* <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"> */
+/* Define CSS custom properties for colors and other reusable values */
 :root {
     --green-primary: #10b981;
     --green-dark: #065f46;
@@ -15,6 +14,7 @@
 }
 
 /* --- GLOBAL STYLES --- */
+/* Reset and base styles for all elements */
 * {
     margin: 0;
     padding: 0;
@@ -22,11 +22,16 @@
     font-family: 'Poppins', sans-serif;
 }
 
-
+body {
+    background: #f1f5f9;
+    height: 100vh;
+    overflow: hidden;
+}
 
 .hidden { display: none !important; }
 
 /* --- ANIMATED BACKGROUND --- */
+/* Floating circles for visual effect */
 .bg-circles {
     position: fixed;
     top: 0;
@@ -51,6 +56,7 @@
 @keyframes move { from { transform: translate(0,0); } to { transform: translate(100px, 100px); } }
 
 /* --- GLASSMORPHISM CARD --- */
+/* Glass effect for modern UI */
 .glass {
     background: var(--glass);
     backdrop-filter: blur(15px);
@@ -59,23 +65,22 @@
     border-radius: 24px;
 }
 
-
 /* --- LANDING PAGE STYLES --- */
 
 #landing-page.view {
-    display: block;
+    display: block; 
     overflow-y: auto;
     overflow-x: hidden;
     height: 100vh;
     scroll-behavior: smooth;
 }
 
+
 body {
     background: #f1f5f9;
     height: 100vh;
     margin: 0;
     overflow-x: hidden;
-    font-family: 'Poppins', sans-serif;
 }
 
 .landing-nav {
@@ -93,9 +98,8 @@ body {
     border-radius: 50px;
 }
 
-
 .landing-section {
-    padding: 100px 8%;
+    padding: 80px 10%; /* Consistent margins with Hero */
     text-align: center;
     width: 100%;
     box-sizing: border-box;
@@ -103,7 +107,7 @@ body {
 
 .section-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Better responsiveness */
     gap: 30px;
     margin: 0 auto;
     max-width: 1200px;
@@ -176,9 +180,11 @@ body {
     padding: 15px 35px; border: 2px solid #e2e8f0; color: var(--slate-900); text-decoration: none; border-radius: 12px; font-weight: 600;
 }
 
-
 /* ABOUT & TEAM */
+.landing-section { padding: 100px 8%; text-align: center; }
+.section-container { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
 .section-title { font-size: 2.5rem; margin-bottom: 50px; color: var(--slate-900); }
+
 .info-card { padding: 40px; border-radius: 30px; text-align: left; }
 .info-card i { font-size: 2.5rem; color: var(--green-primary); margin-bottom: 20px; }
 .info-card h3 { font-size: 1.5rem; margin-bottom: 15px; }
@@ -264,7 +270,7 @@ body {
         margin-bottom: 40px;
     }
     .section-container {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Stack cards on mobile */
     }
 }
 

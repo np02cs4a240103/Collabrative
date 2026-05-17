@@ -41,6 +41,20 @@ function openChat(sector) {
     document.getElementById('issue-type').value = sector;
 }
 
+// UI LOGIC: Rendering messages in chat
+function renderMessages() {
+    // Get chat box element
+    const chatBox = document.getElementById('chat-box');
+    // The backend team will populate the 'messages' array from the DB
+    // Render messages
+    chatBox.innerHTML = messages.map(m => `
+        <div class="msg ${m.sender === currentUser.name ? 'sent' : 'received'}">
+            <div class="msg-text">${m.text}</div>
+            <div class="msg-meta"><span>${m.time}</span></div>
+        </div>
+    `).join('');
+}
+
 // FRONTEND ACTION: Collects data for backend
 function submitTicket() {
     // Collect form data
