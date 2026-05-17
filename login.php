@@ -13,12 +13,18 @@ $data = json_decode(file_get_contents('php://input'), true);
 $email    = trim($data['email'] ?? '');
 $password = $data['password'] ?? '';
 
-$stmt = $pdo->prepare("SELECT id, name, email, password, role FROM users WHERE email = ?");
+$stmt = $pdo->prepare("SELECT id, name, email, password, role, is_active FROM users WHERE email = ?");
 $stmt->execute([$email]);
 $user = $stmt->fetch();
 
 if ($user && password_verify($password, $user['password'])) {
     
+    // Check if user is disabled
+    if (isset($user['is_active']) && !$user['is_active']) {
+        echo json_encode(['success' => false, 'message' => 'Your account has been disabled. Please contact the administrator.']);
+        exit;
+    }
+
     $_SESSION['user_id']  = $user['id'];
     $_SESSION['name'] = $user['name'];
     $_SESSION['role']     = $user['role'];
