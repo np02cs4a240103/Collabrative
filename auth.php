@@ -39,7 +39,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $password = $data['password'];
         $role = $data['role']; 
         $dept_id = isset($data['department_id']) && $data['department_id'] !== '' ? intval($data['department_id']) : NULL;
-        
+
+        // ── Email Domain Whitelisting ──────────────────────────────────────────
+        // Only registrations from approved institutional domains are permitted.
+        // Add more domains to this array as needed in the future.
+        $allowed_domains = ['bicnepal.edu.np'];
+        $email_domain = strtolower(substr(strrchr($email, '@'), 1));
+        if (!in_array($email_domain, $allowed_domains)) {
+            jsonResponse("error", "Registration is restricted to institutional email addresses (@bicnepal.edu.np only).");
+        }
+        // ─────────────────────────────────────────────────────────────────────
+
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
         $check = $conn->prepare("SELECT id FROM users WHERE email = ?");
