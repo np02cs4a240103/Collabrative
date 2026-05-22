@@ -1,6 +1,6 @@
 -- CREATE DATABASE
-CREATE DATABASE unisolve1;
-USE unisolve1;
+CREATE DATABASE unisolve;
+USE unisolve;
 
 -- 1. DEPARTMENTS TABLE
 CREATE TABLE departments (

@@ -2,13 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"><title>UniSolve | Student Dashboard</title>
-    <!-- Google Fonts for Poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Animate.css for animations -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <!-- Custom styles -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="view">
@@ -39,20 +35,13 @@
         </button>
     </div>
 
-    <div class="sb-section">
+    <div class="sb-section" id="quick-access-section">
         <label>QUICK ACCESS</label>
-        <button class="sb-link-small" onclick="openChat('Student Support')">
-            <i class="fas fa-user-graduate"></i> Student IT
-        </button>
-        <button class="sb-link-small" onclick="openChat('Finance')">
-            <i class="fas fa-wallet"></i> Finance & Fees
-        </button>
-        <button class="sb-link-small" onclick="openChat('Entertainment')">
-            <i class="fas fa-gamepad"></i> Entertainment
-        </button>
+        <div id="quick-access-list">
+            <p style="font-size: 0.8rem; padding: 10px; opacity: 0.7;">Loading...</p>
+        </div>
     </div>
 
-    <!-- User Profile Section -->
     <div class="sb-profile">
     <div class="user-info">
         <div class="avatar-initials">--</div> 
@@ -82,6 +71,16 @@
             <span>Clubs, Events & Sports</span></div>
             <div class="sector-card s-orange" onclick="openChat('General')"> <div class="icon-box"><i class="fas fa-comments"></i></div><h4>General Queries</h4>
             <span>Anything else you need</span></div>
+        </div>
+        
+        <div style="margin-top: 40px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <h3>Recent Tickets</h3>
+                <button style="background: none; border: none; cursor: pointer; color: var(--green-primary); font-weight: 600;" onclick="viewChatHistory()">View All <i class="fas fa-arrow-right"></i></button>
+            </div>
+            <div id="dashboard-recent-tickets" style="display: grid; gap: 15px;">
+                <!-- Tickets will be loaded here dynamically -->
+            </div>
         </div>
     </div>
 
@@ -126,7 +125,10 @@
         <div class="chat-window glass">
             <div class="chat-header">
                 <button class="back-btn" onclick="showUserHome()"><i class="fas fa-chevron-left"></i></button>
-                <h3 id="current-sector-title">Sector</h3>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <h3 id="current-sector-title">Sector</h3>
+                    <span id="current-ticket-status" class="status-badge" style="font-size: 0.8rem; padding: 2px 8px;">status</span>
+                </div>
             </div>
             <div id="chat-box" class="chat-messages"></div>
             <div class="chat-input-area">
@@ -137,9 +139,8 @@
     </div>
 </main>
 
-<!-- Scripts -->
-<script src="js/core.js"></script>
-<script src="js/user.js"></script>
+<script src="js/core.js?v=5"></script>
+<script src="js/user.js?v=5"></script>
 
 </body>
 </html>
